@@ -758,7 +758,7 @@ function sceneAnom(st,t){const cs=CASES[st.cs||'E'],AN=cs.A,PT=cs.PT,PD=cs.PD;
  if(st.ts>0)ninoGraph(R,st.ts,st.tsk,st.cs||'E');
  T('자료: NOAA ERSST v5',W-14,H-2.5,{size:10.5,al:'right',c:'#8d96b3',w:500,bl:'bottom'})}
 // Niño 3.4 월별 수온 편차(1970년~2026년 10월). k: 그려진 정도(0~1, 왼쪽부터)
-function ninoGraph(R,a,k,K){K=K||'E';const N=SST26.nino.length,x0=R.x+40,x1=R.x+R.w-12,y0=R.y+28,y1=R.y+R.h-26,lo=-3,hi=3.5,X=i=>x0+(x1-x0)*i/(N-1),Y=v=>y1-(v-lo)/(hi-lo)*(y1-y0);
+function ninoGraph(R,a,k,K){K=K||'E';const N=SST26.nino.length,x0=R.x+40,x1=R.x+R.w-12,y0=R.y+28,y1=R.y+R.h-26,lo=-3,hi=K=='E'?5:3.5,X=i=>x0+(x1-x0)*i/(N-1),Y=v=>y1-(v-lo)/(hi-lo)*(y1-y0);
  ctx.save();ctx.globalAlpha=a;T('엘니뇨 감시 구역의 수온 편차 (월별)',R.x+R.w/2,R.y+18,{size:13,w:800,c:'#ffd76b',a});
  ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,Y(0));ctx.lineTo(x1,Y(0));ctx.stroke();
  ctx.setLineDash([4,4]);[[.5,'#ff8a7a'],[-.5,'#8fc8ff']].forEach(([v,c])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(x0,Y(v));ctx.lineTo(x1,Y(v));ctx.stroke()});ctx.setLineDash([]);
@@ -769,7 +769,9 @@ function ninoGraph(R,a,k,K){K=K||'E';const N=SST26.nino.length,x0=R.x+40,x1=R.x+
  ctx.beginPath();for(let i=0;i<n;i++){const v=Math.min(-.5,SST26.nino[i]);i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v))}ctx.lineTo(X(n-1),Y(-.5));ctx.lineTo(X(0),Y(-.5));ctx.closePath();ctx.fillStyle='rgba(100,150,225,.55)';ctx.fill();
  ctx.strokeStyle='#e8ecff';ctx.lineWidth=1.3;ctx.beginPath();for(let i=0;i<n;i++){const v=SST26.nino[i];i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v))}ctx.stroke();
  if(k>.97&&K=='E'){[[1982.9,'1982'],[1997.9,'1997'],[2015.9,'2015']].forEach(([yr,s2])=>{const i=Math.round((yr-y0yr)*12);T(s2,X(i),Y(SST26.nino[i])-6,{size:10.5,w:800,c:'#ffb3a0',halo:1,a})});
-  pill('2026년 10월 +'+SST26.nino[N-1].toFixed(1)+' °C',X(N-1)-70,Y(SST26.nino[N-1])-2,'#ff8a7a',a,11.5)}
+  const pe=X(N-1),pv=Y(SST26.nino[N-1]),lx=pe-78,ly=pv-20;   // 2026년 10월: 점 + 지시선 + 꼬리표
+  ctx.globalAlpha=a;ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(pe,pv);ctx.stroke();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(pe,pv,3.5,0,7);ctx.fill();
+  pill('2026년 10월 +'+SST26.nino[N-1].toFixed(1)+' °C',lx,ly,'#ff8a7a',a,11.5)}
  // 라니냐: 강한 라니냐 해(아래쪽 봉우리)와 2010년 10월
  if(k>.97&&K=='L'){const lo3=yr=>{let m=0,v=9;for(let i=(yr-y0yr)*12-3;i<(yr-y0yr)*12+15;i++)if(SST26.nino[i]<v){v=SST26.nino[i];m=i}return m};
   [1973,1988,1999].forEach(yr=>{const i=lo3(yr);T(String(yr),X(i),Y(SST26.nino[i])+14,{size:10.5,w:800,c:'#a9cdff',halo:1,a})});
