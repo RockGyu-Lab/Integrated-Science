@@ -420,7 +420,7 @@ function drawSection(st,t){const a=st.sec;if(a<=0)return;ctx.save();ctx.globalAl
   ctx.strokeStyle=pc;ctx.lineWidth=2*g;shaft();ctx.stroke();head();ctx.fillStyle=pc;ctx.fill();ctx.restore()});
  ctx.globalAlpha=a;
  // 따뜻한 해수가 동쪽으로 퍼짐(되돌아옴): 해류 화살표와 구분되는 넓은 반투명 화살표, 따뜻한 해수층 안에
- if(st.spread>0){const A=a*st.spread,dr=st.sdir||1,f0=dr>0?.12:.88,f1=dr>0?.78:.22,x0=sxp(f0),x1=sxp(f1),ym=x=>SEA-level(x,st)+thick(x,st)*.55,hw=11,ph=(t*.6)%1;   // 라니냐: 동 → 서
+ if(st.spread>0){const A=a*st.spread,dr=st.sdir||1,f0=dr>0?.12:.84,f1=dr>0?.78:.22,x0=sxp(f0),x1=sxp(f1),ym=x=>SEA-level(x,st)+(dr>0?thick(x,st)*.55:40),hw=11,ph=(t*.6)%1;   // 라니냐: 동 → 서, 해수면과 나란히(서쪽으로 갈수록 약간 위로)
   ctx.save();ctx.globalAlpha=A;ctx.beginPath();for(let n=0;n<=30;n++){const xf=f0+(f1-f0)*n/30;ctx[n?'lineTo':'moveTo'](sxp(xf),ym(xf)-hw)}
   const ye=ym(f1);ctx.lineTo(x1,ye-hw*2);ctx.lineTo(x1+30*dr,ye);ctx.lineTo(x1,ye+hw*2);for(let n=30;n>=0;n--){const xf=f0+(f1-f0)*n/30;ctx.lineTo(sxp(xf),ym(xf)+hw)}ctx.closePath();
   const g=ctx.createLinearGradient(x0,0,x1+30*dr,0);g.addColorStop(0,'rgba(255,240,215,.05)');g.addColorStop(.6+.3*ph,'rgba(255,240,215,.45)');g.addColorStop(1,'rgba(255,240,215,.2)');
