@@ -114,6 +114,9 @@ HTML 파일을 추가하거나 고치거나 이름을 바꾸면 다음을 확인
 - 테스트 사이트 `cosmology.html`의 `stepHTML`, `.stepbox.sx`, `.stepbox em`, `.pb.glow`를 그대로 가져다 씁니다. 테스트 사이트(Earth-Test-Lab)도 같습니다.
 
 ## 확인 방법 (이 작업 환경 기준)
+- **iPad(Safari)를 늘 함께 생각합니다(사용자 요청, 2026-11-22):** 학생들은 주로 iPad로 봅니다. 크롬에서 괜찮아도 iPad에서만 생기는 문제가 있으므로, canvas 그림을 짜거나 고칠 때마다 아래를 점검합니다.
+  - 화면 밖 그림판(offscreen canvas)을 한 프레임 안에서 여러 그림이 번갈아 덮어쓰지 않습니다. Safari는 `drawImage`를 늦게 처리하여 앞 그림에 뒤 그림이 섞여 깜빡입니다(2026-11-22 수온 편차 지도에서 생김, 지도마다 따로 그림판을 두어 고침). 그림마다 따로 두거나, 바뀌지 않는 그림은 한 번만 칠해 둡니다.
+  - 클라우드에는 Safari가 없어 Chromium으로만 확인할 수 있으므로, iPad에서 확인이 필요한 변경은 사용자에게 iPad로 열어 봐 달라고 알립니다.
 - 아래는 사무실 PC 기준입니다. 클라우드 세션(리눅스)에서는 Edge 대신 미리 설치된 Chromium(Playwright)으로 같은 크기의 화면과 링크를 확인합니다.
 - Windows + PowerShell 환경입니다. Python과 Node는 설치되어 있지 않습니다(`python`은 Microsoft Store 연결 바로가기일 뿐입니다).
 - 링크 점검: 모든 HTML의 `href="...html"`을 찾아, 각 파일 위치를 기준으로 경로가 실제로 있는지 `Test-Path`로 확인합니다.
