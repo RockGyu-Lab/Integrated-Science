@@ -721,8 +721,9 @@ const C10=new Float32Array(NR*NC),A10=new Float32Array(NR*NC),A10L=new Float32Ar
 const DMAX=3,DSTOP=[[0,40,80,160],[.25,95,140,212],[.5,245,245,245],[.75,240,128,98],[1,175,35,45]];
 const DLUT=[];for(let q=0;q<256;q++){const v=q/255;let a=DSTOP[0],b=DSTOP[4];for(let k=1;k<5;k++)if(v<=DSTOP[k][0]){a=DSTOP[k-1];b=DSTOP[k];break}const f=(v-a[0])/((b[0]-a[0])||1);DLUT.push([0,1,2].map(c=>Math.round(a[c+1]+(b[c+1]-a[c+1])*f)))}
 const dlut=(x)=>DLUT[Math.max(0,Math.min(255,Math.round((x+DMAX)/(2*DMAX)*255)))];
-const ocG=document.createElement('canvas');ocG.width=NC;ocG.height=NR;const ocGx=ocG.getContext('2d'),imG=ocGx.createImageData(NC,NR);
-function gridMap(R,val,col,a,label,lc){const v=viewFor(EQB,R,1);for(let i=0;i<NR;i++)for(let c=0;c<NC;c++){const j=(15+c)%NC,k=i*NC+j,cc=col(val(k)),p=(i*NC+c)*4;imG.data[p]=cc[0];imG.data[p+1]=cc[1];imG.data[p+2]=cc[2];imG.data[p+3]=255}
+// 지도마다(R마다) 따로 그리는 판: 한 판을 같은 프레임에서 두 지도가 함께 쓰면 iPad Safari에서 앞 지도가 깜빡임(drawImage가 늦게 처리되어 뒤 지도 내용이 섞임)
+const GBUF=new Map();function gbuf(R){let b=GBUF.get(R);if(!b){const c=document.createElement('canvas');c.width=NC;c.height=NR;const x=c.getContext('2d');b={c,x,im:x.createImageData(NC,NR)};GBUF.set(R,b)}return b}
+function gridMap(R,val,col,a,label,lc){const v=viewFor(EQB,R,1),{c:ocG,x:ocGx,im:imG}=gbuf(R);for(let i=0;i<NR;i++)for(let c=0;c<NC;c++){const j=(15+c)%NC,k=i*NC+j,cc=col(val(k)),p=(i*NC+c)*4;imG.data[p]=cc[0];imG.data[p+1]=cc[1];imG.data[p+2]=cc[2];imG.data[p+3]=255}
  ocGx.putImageData(imG,0,0);ctx.save();ctx.globalAlpha=a;ctx.beginPath();rr(R.x,R.y,R.w,R.h,10);ctx.clip();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
  ctx.drawImage(ocG,v.X(29),v.Y(71),v.X(389)-v.X(29),v.Y(-71)-v.Y(71));ctx.fillStyle='#4a5162';ctx.strokeStyle='#6b7385';
  for(const off of [0,360]){ctx.save();ctx.translate(v.X(off),v.Y(0));ctx.scale(v.sx,v.sy);ctx.lineWidth=.8/Math.min(v.sx,v.sy);ctx.fill(LANDP);ctx.stroke(LANDP);ctx.restore()}
