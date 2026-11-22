@@ -87,7 +87,12 @@ dialog.ov::backdrop{background:transparent}
 .subtabs button:disabled{opacity:.45;cursor:default}
 .subtabs button.on{background:var(--sub);border-color:var(--sub-tx);color:var(--on-sub)}
 /* 비교 탭 > 대기 순환: 비교할 두 시기를 고르는 단추(작은 메뉴보다 한 단계 아래라 작고 가운데에) */
-.subtabs.pairs{justify-content:center}.subtabs.pairs button{flex:0 1 11em;padding:3px 10px;font-size:.85rem}
+/* 셋째 층 단추(작은 메뉴 안에서 다시 고르는 단추, 예: 평상시 vs. 엘니뇨): 둘째 층(연보라)과 구분되게 하늘색 */
+:root{--pair:#1f7fb8;--on-pair:#fff;--pair-bg:#e6f3fb;--pair-bd:#a9d3ee;--pair-tx:#17689a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pair:#7cc6f0;--on-pair:#0b2233;--pair-bg:#13283a;--pair-bd:#2f5f80;--pair-tx:#9fd6f5}}
+:root[data-theme="dark"]{--pair:#7cc6f0;--on-pair:#0b2233;--pair-bg:#13283a;--pair-bd:#2f5f80;--pair-tx:#9fd6f5}
+.subtabs.pairs{justify-content:center}.subtabs.pairs button{flex:0 1 11em;padding:3px 10px;font-size:.85rem;background:var(--pair-bg);border-color:var(--pair-bd);color:var(--pair-tx)}
+.subtabs.pairs button.on{background:var(--pair);border-color:var(--pair-tx);color:var(--on-pair)}
 /* 태평양의 수온 분포의 생각해 보기: 답을 열면 지도에 서·동 수온도 표시 */
 .quiz>.note{margin-top:10px}
 .quiz[hidden]{display:none}
