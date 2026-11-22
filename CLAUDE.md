@@ -6,7 +6,7 @@
 ## 게시
 - 저장소: https://github.com/RockGyu-Lab/Integrated-Science (branch `main`)
 - 사이트: https://rockgyu-lab.github.io/Integrated-Science/ (올린 뒤 반영까지 1~2분)
-- 사용자가 "올려줘"라고 하면 바뀐 내용을 짧은 한국어 메시지로 커밋하고 push합니다.
+- 사용자가 "올려줘"라고 하지 않아도, 작업이 한 묶음 끝나면 바뀐 내용을 짧은 한국어 메시지로 커밋하고 main에 push합니다(사용자 요청, 2026-11-22).
 - `copyright.js`는 지구과학 World의 같은 파일을 복사한 것이며, 문구를 바꾸면 두 사이트의 파일을 함께 고칩니다.
 
 ## 폴더 구조
