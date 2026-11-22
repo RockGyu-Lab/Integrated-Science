@@ -15,6 +15,7 @@ index.html                 메인 화면 (학습실 카드 목록)
 copyright.js               모든 페이지 오른쪽 아래의 저작권 문구 (각 HTML의 </body> 앞에서 불러옴)
 README.md                  사용자용 설명서 (게시 방법, 자료 추가 방법)
 작업기록.md                날짜별 작업 기록과 남은 일 (작업을 시작할 때 읽고, 마칠 때 적음)
+.claude/skills/modern-html/SKILL.md   코드 작성법 스킬 (최신 HTML·CSS·JS 작성법과 지원 범위, 세 사이트 공통)
 ENSO/                      엘니뇨와 라니냐 학습실
   ENSO_index.html          학습실 메뉴 (탐구 01 카드. 지금은 메인 화면에서 연결하지 않고 남겨 둠)
   elnino.html              탐구 01 · 엘니뇨와 라니냐 (Earth-Test-Lab의 elnino.html을 옮김)
@@ -52,6 +53,11 @@ ENSO/                      엘니뇨와 라니냐 학습실
 
 ## 작업 원칙
 아래 규칙 속 파일 예시(`Cosmology/…`, `Eclipses/…`, `Star/…`, `luminosity.html` 등)는 자매 사이트 지구과학 World의 파일입니다. 테스트 사이트(Earth-Test-Lab)도 같은 규칙을 따릅니다.
+
+### 0. 코드 작성법 (스킬)
+- HTML·CSS·JS를 새로 짜거나 구조·동작을 고칠 때는 `.claude/skills/modern-html/SKILL.md`를 먼저 읽고 따릅니다(지원 범위: Chrome·Edge 108, iPad Safari 15.4 이상). 화면에 무엇을 어떻게 보여 줄지는 이 파일의 규칙이 우선합니다.
+- 이 스킬은 지구과학 World, 통합과학 World, Earth-Test-Lab에 같은 내용으로 들어 있습니다. 고치면 세 저장소를 함께 고칩니다.
+- 기존 파일은 그 파일의 방식에 맞추고, 스킬에 맞추려는 큰 변경(예: 팝업을 `<dialog>`로 바꾸기)은 사용자에게 먼저 제안합니다.
 
 ### 1. 과학적 정확성이 먼저입니다
 - 개념, 용어, 수치, 공식, 그림, 시뮬레이션 동작은 고등학교 통합과학 교육과정과 표준 교과서 용어를 기준으로 정확해야 합니다.
