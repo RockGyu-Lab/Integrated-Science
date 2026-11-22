@@ -230,7 +230,7 @@ section[hidden]{display:none}
 <!-- 엘니뇨 vs. 라니냐: 답 없이 자료만 보고 스스로 비교하는 활동 -->
 <section id="p3" role="tabpanel" aria-labelledby="tab3" hidden>
  <div id="n30"><div class="note"><span class="tag self">스스로 해보기</span><p style="flex:1 1 0;min-width:12em">엘니뇨와 라니냐 시기에 적도 부근의 중앙 태평양(180° 부근)과 동태평양에서 수온 편차가 어떻게 나타나는지 비교해 보세요.</p></div></div>
- <div id="n31" hidden><div class="note"><span class="tag self">스스로 해보기</span><p style="flex:1 1 0;min-width:12em">평상시와 비교하여 엘니뇨와 라니냐 시기에 서태평양과 동태평양의 기압, 해수면 높이, 따뜻한 해수층의 두께(수온 약층이 시작되는 깊이), 구름의 양, 강수량이 어떻게 달라지는지 생각해 보세요.</p></div></div>
+ <div id="n31" hidden><div class="note"><span class="tag self">스스로 해보기</span><p id="n31q" style="flex:1 1 0;min-width:12em">평상시와 비교하여 엘니뇨 시기에 서태평양과 동태평양의 기압, 해수면 높이, 따뜻한 해수층의 두께(수온 약층이 시작되는 깊이), 구름의 양, 강수량이 어떻게 달라지는지 생각해 보세요.</p></div></div>
 </section>
 
 <script>
@@ -928,6 +928,8 @@ function openSub3(i){sub3=i;[...$('subs3').children].forEach((b,j)=>{b.classList
 // 대기 순환: 비교할 두 시기 고르기(처음은 평상시 vs. 엘니뇨)
 function openPair(i){PAIR=i;[...$('pairs').children].forEach((b,j)=>{b.classList.toggle('on',j==i);b.setAttribute('aria-selected',j==i)});const [a,b]=PAIRS[i];
  CSCENES[1].steps[0].x=`위는 <em>${PNAME[a]}</em>, 아래는 <em>${PNAME[b]}</em>의 대기 순환입니다(앞 탭 대기 순환의 마지막 모습). 같은 자리끼리 비교해 보세요.`;
+ const V='서태평양과 동태평양의 기압, 해수면 높이, 따뜻한 해수층의 두께(수온 약층이 시작되는 깊이), 구름의 양, 강수량';   // 스스로 해보기: 고른 두 시기에 맞춘 질문
+ $('n31q').textContent=i<2?`평상시와 비교하여 ${PNAME[b]}에 ${V}이 어떻게 달라지는지 생각해 보세요.`:`엘니뇨 시기와 라니냐 시기에 ${V}을 항목별로 비교하여 어떤 차이가 있는지 생각해 보세요.`;
  cv.setAttribute('aria-label',`위는 ${PNAME[a]}, 아래는 ${PNAME[b]}의 적도 단면 대기 순환`);go(0)}
 [...$('pairs').children].forEach((b,i)=>b.onclick=()=>openPair(i));
 [...$('subs').children].forEach((b,i)=>b.onclick=()=>openSub(i));
