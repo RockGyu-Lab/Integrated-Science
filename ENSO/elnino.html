@@ -761,7 +761,7 @@ function sceneAnom(st,t){const cs=CASES[st.cs||'E'],AN=cs.A,PT=cs.PT,PD=cs.PD;
  // 오른쪽 아래: 계산 → Niño 3.4 시간 그래프
  const R=PR3,ra=Math.max(st.calc,st.ts);if(ra>0){ctx.globalAlpha=ra;ctx.fillStyle='rgba(255,255,255,.05)';ctx.strokeStyle='rgba(255,255,255,.16)';ctx.lineWidth=1;rr(R.x,R.y,R.w,R.h,10);ctx.fill();ctx.stroke();ctx.globalAlpha=1}   // 계산이 나올 때 함께 나타남
  const ca=st.calc*(1-st.ts);if(ca>0){T('수온 편차 계산하기 (적도, 120°W)',R.x+R.w/2,R.y+26,{size:14,w:800,c:'#ffd76b',a:ca});
-  T('수온 편차 = 그때의 수온 − 평년 수온',R.x+R.w/2,R.y+56,{size:14,w:800,a:ca});
+  T('수온 편차 = 관측 수온(관측값) − 평년 수온(평년값)',R.x+R.w/2,R.y+56,{size:14,w:800,a:ca});
   const y=R.y+104;ctx.globalAlpha=ca;[[PT.toFixed(1)+' °C',cs.yr,R.x+80,'#ffd76b'],['−','',R.x+160,'#fff'],[PC.toFixed(1)+' °C','평년 10월',R.x+240,'#cfe0ff'],['=','',R.x+318,'#fff'],[sgn(PD)+' °C','편차',R.x+392,cs.c]].forEach(([a1,b1,x,c])=>{T(a1,x,y,{size:a1.length>2?19:22,w:800,c,a:ca});if(b1)T(b1,x,y+22,{size:11.5,c:'#cfd6ee',a:ca})});
   T('편차가 (+)이면 평년보다 따뜻하고, (−)이면 평년보다 차가움',R.x+R.w/2,R.y+R.h-22,{size:12,c:'#cfd6ee',a:ca})}
  if(st.ts>0)ninoGraph(R,st.ts,st.tsk,st.cs||'E');
@@ -834,7 +834,7 @@ function ATM(g){const e=seg(g,2.5,6.5),wn=1-seg(g,2,3.5),we=seg(g,6,8.5);
   openE:we}}
 ESCENES.push({draw:sceneAnom,steps:[{t:'평년의 수온',x:'먼저 <em>평년값</em>(1991~2020년의 10월 평균) 해수면 온도 지도를 봅니다.',d:22,
  xs:[[3,'2026년 10월의 수온','2026년 10월에 실제로 관측한 해수면 온도입니다. 평년과 비교해 동태평양 적도 부근이 더 따뜻합니다.'],
-     [6.5,'수온 편차의 계산','<em>수온 편차 = 그때의 수온 − 평년 수온</em>입니다. 편차가 (+)이면 평년보다 따뜻하고, (−)이면 평년보다 차갑습니다.'],
+     [6.5,'수온 편차의 계산','<em>수온 편차 = 관측 수온(관측값) − 평년 수온(평년값)</em>입니다. 편차가 (+)이면 평년보다 따뜻하고, (−)이면 평년보다 차갑습니다.'],
      [11,'수온 편차 지도','모든 곳의 편차를 색으로 나타내면, <em>동태평양 적도 부근의 편차가 크게 (+)</em>인 것이 한눈에 보입니다. 이것이 엘니뇨입니다.'],
      [16,'엘니뇨 감시 구역의 수온 편차','엘니뇨 감시 구역의 편차를 1970년부터 이어 보면, 편차가 <em>+0.5 °C 이상</em>인 시기(엘니뇨)가 몇 년마다 되풀이되며, <em>2026년은 매우 큽니다</em>.']],
  s:k=>{const g=k*22;return {m2:seg(g,2.5,4),pt:seg(g,6.5,7.5),calc:seg(g,7,8.5),m3:seg(g,11,12.5),box:seg(g,13,14),ts:seg(g,16,17),tsk:seg(g,16.5,21)}}}]});
@@ -861,7 +861,7 @@ const LSCENES=[
    s:k=>NIN(k*19)}]},
  {draw:sceneAnom,steps:[{t:'평년의 수온',x:'먼저 <em>평년값</em>(1991~2020년의 10월 평균) 해수면 온도 지도를 봅니다.',d:22,
   xs:[[3,'2010년 10월의 수온','강한 라니냐가 있었던 2010년 10월에 실제로 관측한 해수면 온도입니다. 평년과 비교해 동태평양 적도 부근이 더 차갑습니다.'],
-      [6.5,'수온 편차의 계산','<em>수온 편차 = 그때의 수온 − 평년 수온</em>입니다. 편차가 (+)이면 평년보다 따뜻하고, (−)이면 평년보다 차갑습니다.'],
+      [6.5,'수온 편차의 계산','<em>수온 편차 = 관측 수온(관측값) − 평년 수온(평년값)</em>입니다. 편차가 (+)이면 평년보다 따뜻하고, (−)이면 평년보다 차갑습니다.'],
       [11,'수온 편차 지도','모든 곳의 편차를 색으로 나타내면, <em>동태평양 적도 부근의 편차가 크게 (−)</em>인 것이 한눈에 보입니다. 이것이 라니냐입니다.'],
       [16,'엘니뇨 감시 구역의 수온 편차','라니냐도 같은 구역에서 판단합니다. 편차가 <em>−0.5 °C 이하</em>인 시기(라니냐)도 몇 년마다 되풀이되며, <em>엘니뇨와 번갈아</em> 나타납니다.']],
   s:k=>{const g=k*22;return {cs:'L',m2:seg(g,2.5,4),pt:seg(g,6.5,7.5),calc:seg(g,7,8.5),m3:seg(g,11,12.5),box:seg(g,13,14),ts:seg(g,16,17),tsk:seg(g,16.5,21)}}}]},
@@ -895,7 +895,7 @@ function sceneCmpW(st,t){const S=[{...SCENES[2].steps[0].s(1),tagL:'평상시',t
  PAIRS[PAIR].forEach((k,i)=>{const s2=S[k],sp=1+.8*(s2.big||0);PW.forEach((p,n)=>{p.u=(n/PW.length+t*.06*sp)%1});
   ctx.save();ctx.translate((W-W*CK)/2,2+i*(CR.h+6)*CK);ctx.scale(CK,CK);sceneWalk(s2,t,CR);ctx.restore()})}
 const CSCENES=[
- {draw:sceneCmpA,steps:[{t:'수온 편차 비교',x:'위는 <em>엘니뇨 시기</em>(2026년 10월), 아래는 <em>라니냐 시기</em>(2010년 10월)의 해수면 온도 편차(그때의 수온 − 평년 수온)입니다.',d:1,s:k=>({})}]},
+ {draw:sceneCmpA,steps:[{t:'수온 편차 비교',x:'위는 <em>엘니뇨 시기</em>(2026년 10월), 아래는 <em>라니냐 시기</em>(2010년 10월)의 해수면 온도 편차(관측 수온 − 평년 수온)입니다.',d:1,s:k=>({})}]},
  {draw:sceneCmpW,h:513,steps:[{t:'대기 순환 비교',x:'',d:1,s:k=>({V:-1,loop:1})}]}];
 
 let tab=0,sub=0,si=0,ph=0,playing=true,last=performance.now()/1000,quizOK=false,quizT=0;
